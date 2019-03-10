@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: cupkey-api
+  name: cupkey-api
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cupkey-api
+    spec:
+      containers:
+        - name: web
+          image: gcr.io/$PROJECT_ID/cupkey-api:latest
+          ports:
+          - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: cupkey-api
+spec:
+  selector:
+    app: cupkey-api
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cupkey-api
+  labels:
+spec:
+  rules:
+  - host: api-cupkey.benleb.de
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: cupkey-api-service
+          servicePort: 80

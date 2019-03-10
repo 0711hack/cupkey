@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:latest
+          ports:
+          - containerPort: 3306
+          env:
+            - name: MYSQL_USER
+              value: springuser
+            - name: MYSQL_PASSWORD
+              value: Ys0nf1wg
+            - name: MYSQL_DATABASE
+              value: db_example
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mysql
+spec:
+  selector:
+    app: mysql
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 3306

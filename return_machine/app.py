@@ -16,24 +16,30 @@ api = Api(app)
 class CupSignature(Resource):
     def post(self):
         """Generate a cup-key and sign it (basically the id of a cup)."""
+        args = parser.parse_args()
+        shop_id = args.get("shop_id")
+
         shop = None
         cup = None
 
         if "shop_id" in event and isinstance(event["shop_id"], str):
             shop: Shop = Shop(event["shop_id"])
             cup: Cup = Cup(shop_id=shop.shop_id)
-            return dict(cup_id=cup.cup_id, cup_sighash=cup.signature_hash, shop_id=shop.shop_id)
+            return dict(cup_id=cup.cup_id, cup_sighash=cup.signature_hash, shop_id=shop.shop_id), 200
 
 
 class ShopKeys(Resource):
 
     def post(self):
         """Generate a keypair for cup-selling shops like starbucks."""
-        if "shop_id" in event and event["shop_id"] in shop_list:
-            shop = shop_list[event["shop_id"]]
+        args = parser.parse_args()
+        shop_id = args.get("shop_id")
+
+        if shop_id and shop_id in shop_list:
+            shop = shop_list[shop_id]
         else:
-            shop = Shop(event["shop_id"])
-            shop_list[event["shop_id"]] = shop
+            shop = Shop(shop_id)
+            shop_list[shop_id] = shop
 
         return dict(
             shop_id=str(shop.shop_id),
@@ -47,13 +53,18 @@ class ShopKeys(Resource):
                     Encoding.PEM, PublicFormat.SubjectPublicKeyInfo
                 ).decode()
             ),
-        )
+        ), 200
 
 
 class VerifyCupSignature(Resource):
     def post(self):
+        args = parser.parse_args()
+        cup_id = args.get("cup_id")
+        cup_signature = args.get("cup_signature")
+        shop_pub_key = args.get("shop_pub_key")
+
         shop_pub_key.verify(cup_signature, cup_id)
-        return True
+        return True, 200
 
 api.add_resource(CupSignature, '/cup/sign')
 api.add_resource(VerifyCupSignature, '/cup/verify')

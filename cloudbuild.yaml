@@ -18,13 +18,4 @@ steps:
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
 
-  # - id: deploy-mysql-old
-  #   name: mysql
-  #   timeout: 180s
-  #   env:
-  #     - MYSQL_USER=springuser
-  #     - MYSQL_PASSWORD=Ys0nf1wg
-  #     - MYSQL_DATABASE=db_example
-  #     - MYSQL_ROOT_PASSWORD=root
-
 images: ['eu.gcr.io/$PROJECT_ID/cupkey']

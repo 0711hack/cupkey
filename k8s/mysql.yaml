@@ -11,24 +11,24 @@ spec:
       labels:
         app: mysql
     spec:
-    containers:
-      - name: mysql
-        image: mysql:latest
-        ports:
-          - containerPort: 3306
-        env:
-          - name: MYSQL_USER
-            value: springuser
-          - name: MYSQL_PASSWORD
-            value: Ys0nf1wg
-          - name: MYSQL_DATABASE
-            value: db_example
-          - name: MYSQL_ROOT_PASSWORD
-            value: root
-        # livenessProbe:
-        #   httpGet:
-        #     path: /
-        #     port: 8080
+      container:
+        - name: mysql
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_USER
+              value: springuser
+            - name: MYSQL_PASSWORD
+              value: Ys0nf1wg
+            - name: MYSQL_DATABASE
+              value: db_example
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
 ---
 kind: Service
 apiVersion: v1

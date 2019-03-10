@@ -34,9 +34,9 @@ spec:
         - name: admin
           containerPort: 8080
         args:
-        - --api
-        - --kubernetes
-        - --logLevel=INFO
+          - --api
+          - --kubernetes
+          - --logLevel=INFO
 ---
 kind: Service
 apiVersion: v1

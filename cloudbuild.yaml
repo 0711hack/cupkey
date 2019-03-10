@@ -1,13 +1,15 @@
 steps:
 
-  - name: 'gcr.io/cloud-builders/gradle'
+  - id: gradle-build-cupkey-api
+    name: 'gcr.io/cloud-builders/gradle'
     dir: 'api/'
     args: ['build']
-  - name: 'gcr.io/cloud-builders/docker'
+  - id: docker-build-cupkey-api
+    name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'api/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey', 'api/.']
 
-  - name: 'gcr.io/cloud-builders/kubectl'
-    id: Deploy
+  - id: deploy-mysql
+    name: 'gcr.io/cloud-builders/kubectl'
     args:
       - 'apply'
       - '-f'
@@ -16,14 +18,13 @@ steps:
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
 
-  - id: deploy-mysql
-    name: mysql
-    args: ['--detach']
-    timeout: 180s
-    env:
-      - MYSQL_USER=springuser
-      - MYSQL_PASSWORD=Ys0nf1wg
-      - MYSQL_DATABASE=db_example
-      - MYSQL_ROOT_PASSWORD=root
+  # - id: deploy-mysql-old
+  #   name: mysql
+  #   timeout: 180s
+  #   env:
+  #     - MYSQL_USER=springuser
+  #     - MYSQL_PASSWORD=Ys0nf1wg
+  #     - MYSQL_DATABASE=db_example
+  #     - MYSQL_ROOT_PASSWORD=root
 
 images: ['eu.gcr.io/$PROJECT_ID/cupkey']

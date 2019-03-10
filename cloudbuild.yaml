@@ -6,7 +6,7 @@ steps:
     args: ['build']
   - id: docker-build-cupkey-api
     name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', 'api/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey', 'api/.']
+    args: ['build', '-f', 'api/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey:$COMMIT_SHA', 'api/.']
 
   - id: deploy-mysql
     name: 'gcr.io/cloud-builders/kubectl'

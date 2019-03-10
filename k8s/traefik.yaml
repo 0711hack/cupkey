@@ -4,6 +4,7 @@ kind: ServiceAccount
 metadata:
   name: traefik-ingress-controller
   namespace: kube-system
+  a: b
 ---
 kind: Deployment
 apiVersion: extensions/v1beta1
@@ -12,6 +13,7 @@ metadata:
   namespace: kube-system
   labels:
     k8s-app: traefik-ingress-lb
+    a: b
 spec:
   replicas: 1
   selector:
@@ -43,6 +45,7 @@ apiVersion: v1
 metadata:
   name: traefik-ingress-service
   namespace: kube-system
+  a: b
 spec:
   selector:
     k8s-app: traefik-ingress-lb

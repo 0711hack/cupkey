@@ -15,8 +15,7 @@ spec:
         - name: cupkey-return
           image: eu.gcr.io/starthack2019-234023/cupkey-return:latest
           ports:
-          - containerPort: 80
-          - containerPort: 8080
+          - containerPort: 5000
           # livenessProbe:
           #   httpGet:
           #     path: /
@@ -29,10 +28,16 @@ metadata:
 spec:
   selector:
     app: cupkey-return
-  type: LoadBalancer
+  type: ClusterIP
   ports:
-    - protocol: TCP
-      port: 8080
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 5000
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 5000
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -50,4 +55,4 @@ spec:
       - path: /*
         backend:
           serviceName: cupkey-return-service
-          servicePort: 8080
+          servicePort: 5000

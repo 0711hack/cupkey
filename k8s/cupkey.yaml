@@ -43,6 +43,8 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "traefik"
 spec:
+  tls:
+    - secretName: cupkey-api-tls-cert
   rules:
   - host: api-cupkey.benleb.de
     http:

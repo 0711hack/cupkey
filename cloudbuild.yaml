@@ -7,18 +7,18 @@ steps:
     args: ['build']
   - id: docker-build-cupkey-api
     name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', 'api/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey-api:$COMMIT_SHA', 'api/.']
+    args: ['build', '-f', 'api/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey-api:$SHORT_SHA', 'api/.']
   - id: docker-move-cupkey-api-latest-tag
     name: 'gcr.io/cloud-builders/docker'
-    args: ['tag', 'eu.gcr.io/$PROJECT_ID/cupkey-api:$COMMIT_SHA', 'eu.gcr.io/$PROJECT_ID/cupkey-api:latest']
+    args: ['tag', 'eu.gcr.io/$PROJECT_ID/cupkey-api:$SHORT_SHA', 'eu.gcr.io/$PROJECT_ID/cupkey-api:latest']
 
   # return machine / sbb hq
   - id: docker-build-return-machine
     name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', 'return_machine/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey-return:$COMMIT_SHA', 'return_machine/.']
+    args: ['build', '-f', 'return_machine/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey-return:$SHORT_SHA', 'return_machine/.']
   - id: docker-move-cupkey-return-latest-tag
     name: 'gcr.io/cloud-builders/docker'
-    args: ['tag', 'eu.gcr.io/$PROJECT_ID/cupkey-return:$COMMIT_SHA', 'eu.gcr.io/$PROJECT_ID/cupkey-return:latest']
+    args: ['tag', 'eu.gcr.io/$PROJECT_ID/cupkey-return:$SHORT_SHA', 'eu.gcr.io/$PROJECT_ID/cupkey-return:latest']
 
   # deploy mysql as api backend
   - id: deploy-mysql
@@ -27,6 +27,17 @@ steps:
       - 'apply'
       - '-f'
       - 'k8s/mysql.yaml'
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
+
+  # deploy traefik rbac and so on
+  - id: deploy-traefik-adds
+    name: 'gcr.io/cloud-builders/kubectl'
+    args:
+      - 'apply'
+      - '-f'
+      - 'k8s/traefik_adds.yaml'
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'

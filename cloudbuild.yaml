@@ -1,0 +1,9 @@
+steps:
+  
+  - id: deploy-mysql
+    name: mysql
+    env:
+      - MYSQL_USER=springuser
+      - MYSQL_PASSWORD=Ys0nf1wg
+      - MYSQL_DATABASE=db_example
+      - MYSQL_ROOT_PASSWORD=root

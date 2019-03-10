@@ -10,6 +10,7 @@ RUN apt-get update -y && \
 
 WORKDIR /app
 
+RUN pip3 install --no-cache-dir --upgrade cryptography
 # RUN pip install -r requirements.txt
 
 COPY . /app

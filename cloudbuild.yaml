@@ -1,7 +1,14 @@
 steps:
-  
+
+  - id: build cupkey-api container
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-f', 'api/Dockerfile', '-t', 'eu.gcr.io/starthack2019-234023/cupkey', 'api/.']
+    timeout: 600s
+    images: ['eu.gcr.io/starthack2019-234023/cupkey']
+
   - id: deploy-mysql
     name: mysql
+    timeout: 180s
     env:
       - MYSQL_USER=springuser
       - MYSQL_PASSWORD=Ys0nf1wg

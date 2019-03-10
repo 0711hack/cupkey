@@ -16,6 +16,7 @@ spec:
           image: eu.gcr.io/starthack2019-234023/cupkey-api:latest
           ports:
           - containerPort: 80
+          - containerPort: 443
           - containerPort: 8080
           # livenessProbe:
           #   httpGet:

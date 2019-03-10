@@ -68,4 +68,4 @@ spec:
       - path: /
         backend:
           serviceName: cupkey-return-service
-          servicePort: 5000
+          servicePort: 443

@@ -39,14 +39,14 @@ spec:
       port: 443
       targetPort: 5000
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: special-config
-  namespace: default
-data:
-  tls.key: very
-  tls.crt: very
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: special-config
+#   namespace: default
+# data:
+#   tls.key: very
+#   tls.crt: very
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress

@@ -22,7 +22,6 @@ spec:
       labels:
         k8s-app: traefik-ingress-lb
         name: traefik-ingress-lb
-        aaa: b
     spec:
       serviceAccountName: traefik-ingress-controller
       terminationGracePeriodSeconds: 61
@@ -31,11 +30,14 @@ spec:
         name: traefik-ingress-lb
         ports:
         - name: http
-          containerPort: 80
-        - name: admin
+          hostPort: 80
           containerPort: 8080
-        - name: muh
-          containerPort: 8081
+        - name: https
+          hostPort: 443
+          containerPort: 8080
+        - name: admin
+          hostPort: 8080
+          containerPort: 8080
         args:
           - --api
           - --kubernetes
@@ -52,11 +54,11 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      name: web
+      name: http
+    - protocol: TCP
+      port: 443
+      name: https
     - protocol: TCP
       port: 8080
       name: admin
-    - protocol: TCP
-      port: 8081
-      name: muh
-  type: NodePort
+  type: ClusterIP

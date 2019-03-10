@@ -39,6 +39,7 @@ kind: Ingress
 metadata:
   name: cupkey-api
   labels:
+    app: cupkey-api
 spec:
   rules:
   - host: api-cupkey.benleb.de

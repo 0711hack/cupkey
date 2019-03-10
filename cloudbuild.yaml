@@ -14,6 +14,7 @@ steps:
 
   - id: deploy-mysql
     name: mysql
+    args: '--detach'
     timeout: 180s
     env:
       - MYSQL_USER=springuser

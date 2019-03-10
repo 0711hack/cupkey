@@ -1,19 +1,19 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: cupkey-api
+  name: cupkey-return
   labels:
-    app: cupkey-api
+    app: cupkey-return
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: cupkey-api
+        app: cupkey-return
     spec:
       containers:
-        - name: cupkey-api
-          image: eu.gcr.io/starthack2019-234023/cupkey-api:latest
+        - name: cupkey-return
+          image: eu.gcr.io/starthack2019-234023/cupkey-return:latest
           ports:
           - containerPort: 80
           - containerPort: 8080
@@ -25,10 +25,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: cupkey-api-service
+  name: cupkey-return-service
 spec:
   selector:
-    app: cupkey-api
+    app: cupkey-return
   type: ClusterIP
   ports:
     - protocol: TCP
@@ -37,7 +37,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: cupkey-api
+  name: cupkey-return
   labels:
 spec:
   rules:
@@ -46,5 +46,5 @@ spec:
       paths:
       - path: /*
         backend:
-          serviceName: cupkey-api-service
+          serviceName: cupkey-return-service
           servicePort: 8080

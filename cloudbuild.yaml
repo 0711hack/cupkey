@@ -6,8 +6,6 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'api/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey', 'api/.']
 
-  images: ['eu.gcr.io/$PROJECT_ID/cupkey']
-
   # - id: build-cupkey-api
   #   name: 'gcr.io/cloud-builders/docker'
   #   args: ['build', '-f', 'api/Dockerfile', '-t', 'eu.gcr.io/starthack2019-234023/cupkey', 'api/.']
@@ -22,3 +20,5 @@ steps:
       - MYSQL_PASSWORD=Ys0nf1wg
       - MYSQL_DATABASE=db_example
       - MYSQL_ROOT_PASSWORD=root
+
+images: ['eu.gcr.io/$PROJECT_ID/cupkey']

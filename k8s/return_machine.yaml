@@ -39,6 +39,15 @@ spec:
       port: 443
       targetPort: 5000
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: special-config
+  namespace: default
+data:
+  tls.key: very
+  tls.crt: very
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -48,11 +57,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "traefik"
 spec:
+  tls:
+    - secretName: cupkey-return-tls-cert
   rules:
   - host: return-cupkey.benleb.de
     http:
       paths:
-      - path: /*
+      - path: /
         backend:
           serviceName: cupkey-return-service
           servicePort: 5000

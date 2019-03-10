@@ -5,6 +5,8 @@
 .gradle
 build/
 
+.mvn
+
 # Ignore Gradle GUI config
 gradle-app.setting
 

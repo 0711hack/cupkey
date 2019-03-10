@@ -28,7 +28,7 @@ metadata:
 spec:
   selector:
     app: cupkey-return
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - name: http
       protocol: TCP

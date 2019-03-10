@@ -25,7 +25,7 @@ spec:
         aaa: b
     spec:
       serviceAccountName: traefik-ingress-controller
-      terminationGracePeriodSeconds: 60
+      terminationGracePeriodSeconds: 61
       containers:
       - image: traefik
         name: traefik-ingress-lb
@@ -34,6 +34,8 @@ spec:
           containerPort: 80
         - name: admin
           containerPort: 8080
+        - name: muh
+          containerPort: 8081
         args:
           - --api
           - --kubernetes
@@ -54,4 +56,7 @@ spec:
     - protocol: TCP
       port: 8080
       name: admin
+    - protocol: TCP
+      port: 8081
+      name: muh
   type: NodePort

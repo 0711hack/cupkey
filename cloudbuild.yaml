@@ -4,7 +4,7 @@ steps:
     args: ['build']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'api/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey', 'api/.']
-    images: ['eu.gcr.io/$PROJECT_ID/cupkey']
+    # images: ['eu.gcr.io/$PROJECT_ID/cupkey']
 
   # - id: build-cupkey-api
   #   name: 'gcr.io/cloud-builders/docker'

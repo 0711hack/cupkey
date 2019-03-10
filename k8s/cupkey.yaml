@@ -44,7 +44,7 @@ spec:
   - host: api-cupkey.benleb.de
     http:
       paths:
-      - path: /*
+      - path: /api/*
         backend:
           serviceName: cupkey-api-service
           servicePort: 8080

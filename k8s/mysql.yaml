@@ -16,6 +16,15 @@ spec:
           image: mysql:latest
           ports:
           - containerPort: 3306
+          env:
+            - name: MYSQL_USER
+              value: springuser
+            - name: MYSQL_PASSWORD
+              value: Ys0nf1wg
+            - name: MYSQL_DATABASE
+              value: db_example
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
           # livenessProbe:
           #   httpGet:
           #     path: /

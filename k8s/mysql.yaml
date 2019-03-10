@@ -11,7 +11,7 @@ spec:
       labels:
         app: mysql
     spec:
-      container:
+      containers:
         - name: mysql
           image: mysql:latest
           ports:

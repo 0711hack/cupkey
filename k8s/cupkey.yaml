@@ -47,4 +47,4 @@ spec:
       - path: /*
         backend:
           serviceName: cupkey-api-service
-          servicePort: 80
+          servicePort: 8080

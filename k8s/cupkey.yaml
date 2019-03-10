@@ -29,7 +29,7 @@ metadata:
 spec:
   selector:
     app: cupkey-api
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 8080

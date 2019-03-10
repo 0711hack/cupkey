@@ -1,10 +1,16 @@
 steps:
 
-  - id: build cupkey-api container
-    name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', 'api/Dockerfile', '-t', 'eu.gcr.io/starthack2019-234023/cupkey', 'api/.']
-    timeout: 600s
-    # images: ['eu.gcr.io/starthack2019-234023/cupkey']
+  - name: 'gcr.io/cloud-builders/gradle'
+    args: ['build']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-f', 'api/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey', 'api/.']
+    images: ['eu.gcr.io/$PROJECT_ID/cupkey']
+
+  # - id: build-cupkey-api
+  #   name: 'gcr.io/cloud-builders/docker'
+  #   args: ['build', '-f', 'api/Dockerfile', '-t', 'eu.gcr.io/starthack2019-234023/cupkey', 'api/.']
+  #   timeout: 600s
+  #   # images: ['eu.gcr.io/starthack2019-234023/cupkey']
 
   - id: deploy-mysql
     name: mysql

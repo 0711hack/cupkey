@@ -13,6 +13,6 @@ RUN apt-get update -y && \
 
 COPY . /app
 
-RUN pip3 install --no-cache-dir --upgrade cryptography
+RUN pip3 install --no-cache-dir --upgrade cryptography flask-restful
 ENTRYPOINT [ "python3" ]
 CMD [ "app.py" ]

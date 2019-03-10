@@ -1,5 +1,6 @@
 steps:
 
+  # api
   - id: gradle-build-cupkey-api
     name: 'gcr.io/cloud-builders/gradle'
     dir: 'api/'
@@ -11,6 +12,7 @@ steps:
     name: 'gcr.io/cloud-builders/docker'
     args: ['tag', 'eu.gcr.io/$PROJECT_ID/cupkey-api:$COMMIT_SHA', 'eu.gcr.io/$PROJECT_ID/cupkey-api:latest']
 
+  # return machine / sbb hq
   - id: docker-build-return-machine
     name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'return_machine/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey-return:$COMMIT_SHA', 'return_machine/.']
@@ -18,6 +20,7 @@ steps:
     name: 'gcr.io/cloud-builders/docker'
     args: ['tag', 'eu.gcr.io/$PROJECT_ID/cupkey-return:$COMMIT_SHA', 'eu.gcr.io/$PROJECT_ID/cupkey-return:latest']
 
+  # deploy mysql as api backend
   - id: deploy-mysql
     name: 'gcr.io/cloud-builders/kubectl'
     args:
@@ -28,12 +31,24 @@ steps:
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
 
+  # deploy cupkey-api
   - id: deploy-cupkey-api
     name: 'gcr.io/cloud-builders/kubectl'
     args:
       - 'apply'
       - '-f'
       - 'k8s/cupkey.yaml'
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
+
+  # deploy cupkey-return
+  - id: deploy-cupkey-return
+    name: 'gcr.io/cloud-builders/kubectl'
+    args:
+      - 'apply'
+      - '-f'
+      - 'k8s/return_machine.yaml'
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'

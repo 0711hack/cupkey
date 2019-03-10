@@ -43,15 +43,15 @@ steps:
   #     - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
 
   # deploy traefik
-  - id: remove-traefik-ingress
-    name: 'gcr.io/cloud-builders/kubectl'
-    args:
-      - 'delete'
-      - '-f'
-      - 'k8s/traefik.yaml'
-    env:
-      - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
+  # - id: remove-traefik-ingress
+  #   name: 'gcr.io/cloud-builders/kubectl'
+  #   args:
+  #     - 'delete'
+  #     - '-f'
+  #     - 'k8s/traefik.yaml'
+  #   env:
+  #     - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
+  #     - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
   - id: deploy-traefik-ingress
     name: 'gcr.io/cloud-builders/kubectl'
     args:

@@ -31,6 +31,17 @@ steps:
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
 
+  # deploy traefik
+  - id: deploy-traefik-ingress
+    name: 'gcr.io/cloud-builders/kubectl'
+    args:
+      - 'apply'
+      - '-f'
+      - 'k8s/traefik.yaml'
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
+
   # deploy cupkey-api
   - id: deploy-cupkey-api
     name: 'gcr.io/cloud-builders/kubectl'

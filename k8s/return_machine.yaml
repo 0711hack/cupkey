@@ -40,6 +40,8 @@ metadata:
   name: cupkey-return
   labels:
     app: cupkey-return
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
   - host: return-cupkey.benleb.de

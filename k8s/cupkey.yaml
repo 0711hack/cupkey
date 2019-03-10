@@ -40,6 +40,8 @@ metadata:
   name: cupkey-api
   labels:
     app: cupkey-api
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
   - host: api-cupkey.benleb.de

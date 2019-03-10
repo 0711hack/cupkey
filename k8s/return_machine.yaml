@@ -45,7 +45,7 @@ spec:
   - host: return-cupkey.benleb.de
     http:
       paths:
-      - path: /return/*
+      - path: /*
         backend:
           serviceName: cupkey-return-service
           servicePort: 8080

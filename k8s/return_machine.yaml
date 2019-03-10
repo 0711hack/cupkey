@@ -42,7 +42,7 @@ metadata:
     app: cupkey-return
 spec:
   rules:
-  - host: api-cupkey.benleb.de
+  - host: return-cupkey.benleb.de
     http:
       paths:
       - path: /return/*

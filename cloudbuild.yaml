@@ -59,7 +59,7 @@ steps:
     args:
       - 'apply'
       - '-f'
-      - 'k8s/cupkey.yaml'
+      - 'k8s/cupkey-api.yaml'
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
@@ -70,7 +70,7 @@ steps:
     args:
       - 'apply'
       - '-f'
-      - 'k8s/return_machine.yaml'
+      - 'k8s/cupkey-return.yaml'
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'

@@ -1,0 +1,31 @@
+version: "3.0"
+networks: {brHome: {external: true}}
+services:
+
+  cupkey:
+    image: benleb/hass-cli:cupkey
+    container_name: "cupkey"
+    networks: [brHome]
+    build:
+      context: "."
+      dockerfile: "Dockerfile"
+    ports:
+      - "8080:8080"
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: cupkey
+        awslogs-region: eu-central-1
+        awslogs-stream-prefix: cupkey-api
+
+  mysql:
+    image: mysql
+    container_name: "mysql"
+    networks: [brHome]
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_USER=springuser
+      - MYSQL_PASSWORD=Ys0nf1wg
+      - MYSQL_DATABASE=db_example
+      - MYSQL_ROOT_PASSWORD=root

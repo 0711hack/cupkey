@@ -53,4 +53,4 @@ steps:
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
 
-images: ['eu.gcr.io/$PROJECT_ID/cupkey']
+images: ['eu.gcr.io/$PROJECT_ID/cupkey-api', 'eu.gcr.io/$PROJECT_ID/cupkey-return']

@@ -31,16 +31,16 @@ steps:
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
 
-  # deploy traefik rbac and so on
-  - id: deploy-traefik-adds
-    name: 'gcr.io/cloud-builders/kubectl'
-    args:
-      - 'apply'
-      - '-f'
-      - 'k8s/traefik_adds.yaml'
-    env:
-      - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
+  # # deploy traefik rbac and so on
+  # - id: deploy-traefik-adds
+  #   name: 'gcr.io/cloud-builders/kubectl'
+  #   args:
+  #     - 'apply'
+  #     - '-f'
+  #     - 'k8s/traefik_adds.yaml'
+  #   env:
+  #     - 'CLOUDSDK_COMPUTE_ZONE=europe-west3-c'
+  #     - 'CLOUDSDK_CONTAINER_CLUSTER=starthack2019'
 
   # deploy traefik
   - id: deploy-traefik-ingress

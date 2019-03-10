@@ -7,14 +7,14 @@ steps:
   - id: docker-build-cupkey-api
     name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'api/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey-api:$COMMIT_SHA', 'api/.']
-  - id: docker-move-latest-tag
+  - id: docker-move-cupkey-api-latest-tag
     name: 'gcr.io/cloud-builders/docker'
     args: ['tag', 'eu.gcr.io/$PROJECT_ID/cupkey-api:$COMMIT_SHA', 'eu.gcr.io/$PROJECT_ID/cupkey-api:latest']
 
   - id: docker-build-return-machine
     name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'return_machine/Dockerfile', '--tag=eu.gcr.io/$PROJECT_ID/cupkey-return:$COMMIT_SHA', 'return_machine/.']
-  - id: docker-move-latest-tag
+  - id: docker-move-cupkey-return-latest-tag
     name: 'gcr.io/cloud-builders/docker'
     args: ['tag', 'eu.gcr.io/$PROJECT_ID/cupkey-return:$COMMIT_SHA', 'eu.gcr.io/$PROJECT_ID/cupkey-return:latest']
 
